@@ -1,0 +1,49 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bluff</title>
+    <script src="https://unpkg.com/alpinejs" defer></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+
+<body>
+    <div x-data="{ dice: 1, idx: 0, list: ['1N', '1S', '2N', '3N', '2S', '4N', '5N', '3S', '6N', '7N', '4S'] }"
+        class="h-screen flex flex-col">
+        <!-- First Row -->
+
+        <div @click="dice = dice < 6 ? dice + 1 : 1"
+            class="flex-1 flex justify-center items-center bg-black text-blue-500 text-9xl">
+            <i data-lucide="dice-1" x-show="dice === 1" width="96" height="96"></i>
+            <i data-lucide="dice-2" x-show="dice === 2" width="96" height="96"></i>
+            <i data-lucide="dice-3" x-show="dice === 3" width="96" height="96"></i>
+            <i data-lucide="dice-4" x-show="dice === 4" width="96" height="96"></i>
+            <i data-lucide="dice-5" x-show="dice === 5" width="96" height="96"></i>
+            <i data-lucide="star" x-show="dice === 6" width="96" height="96"></i>
+        </div>
+
+        <div class="flex-0 flex justify-center items-center bg-black text-cyan-500 text-9xl">
+            <button @click="idx = 0; dice = 1">
+                <i data-lucide="rotate-ccw" width="72" height="72"></i>
+            </button>
+        </div>
+
+        <!-- Second Row -->
+        <div @click="idx = idx < list.length - 1 ? idx + 1 : 0"
+            class="flex-1 flex justify-center items-center bg-black text-emerald-500 text-6xl">
+            <span x-text="list[idx].slice(0, -1)"></span>
+            <i class="ml-3" data-lucide="star" x-show="list[idx].slice(-1) === 'S'" width="96" height="96"></i>
+            <i class="ml-3" data-lucide="dices" x-show="list[idx].slice(-1) === 'N'" width="96" height="96"></i>
+        </div>
+    </div>
+
+    <script>
+        lucide.createIcons();
+    </script>
+
+
+</body>
+
+</html>
